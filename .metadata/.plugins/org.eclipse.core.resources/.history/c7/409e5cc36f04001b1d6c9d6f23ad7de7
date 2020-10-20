@@ -1,0 +1,70 @@
+package com.example.eprep.controller;
+
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.eprep.dao.AddressRepository;
+import com.example.eprep.dao.UserRepository;
+import com.example.eprep.model.Addressess;
+import com.example.eprep.model.Users;
+import com.example.eprep.utils.States;
+
+
+
+
+
+@Controller
+public class UsersController {
+
+	@Autowired
+	private AddressRepository addressRepository;
+	
+	@Autowired
+	private UserRepository usersRepository;
+	
+	@ModelAttribute("states")
+    public List<States> populateStates(){    	
+        return Arrays.asList(States.values());
+    }	
+	
+	@PostMapping("updatecontact")
+	String update(@ModelAttribute Addressess addressess, Model model) {
+	
+		try {
+			Users user=usersRepository.findById(addressess.getId()).get();	
+			addressess.setUser(user);
+			addressRepository.save(addressess);
+			model.addAttribute("msg", "Update success");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:profile";	
+		
+	}
+	
+	@ModelAttribute("user")
+	Users user() {
+		return new Users();
+	}
+	
+	@ModelAttribute("address")
+	Addressess address() {
+	return new Addressess();		
+	}
+	
+	@ModelAttribute("states")
+    public List<States> populateStates(){    	
+        return Arrays.asList(States.values());
+    }
+	
+}

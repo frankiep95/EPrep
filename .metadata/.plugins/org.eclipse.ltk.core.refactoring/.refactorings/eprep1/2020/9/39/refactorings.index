@@ -1,0 +1,19 @@
+1600923441220	Move folder
+1600923625897	Move 'WEB-INF' to 'main'
+1600923755388	Move 'index.jsp' to 'prep'
+1600923790671	Move 'index.jsp' to 'controller'
+1600925017075	Move 'index.jsp' to 'views'
+1600925083568	Move 'static' to 'webapp'
+1600925293394	Delete element
+1601007017596	Move 'home.jsp' to 'main'
+1601007062548	Move 'home.jsp' to 'views'
+1601007620805	Move 'views' to 'prep'
+1601008064572	Move 'views' to 'WEB-INF'
+1601009579410	Move file
+1601010663413	Delete element
+1601010708863	Delete element
+1601010739737	Move 'static' to 'webapp'
+1601013733369	Move 'header.jsp' to 'components'
+1601141719062	Move 'signup.jsp' to 'views'
+1601141724366	Move 'profile.jsp' to 'views'
+1601156525846	Rename type 'UseresRepository'

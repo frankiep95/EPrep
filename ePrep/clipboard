@@ -1,0 +1,278 @@
+<div class="row">
+						<div class="col-md">
+							<c:if test="${not empty user.image}">
+								<img src="static/img/users/${user.id}/profile/${user.image}"
+									style="width: 200px; height: 200px; border-radius: 50%;"
+									class="img-responsive">
+							</c:if>
+							<a href="#" data-toggle="modal" data-target="#add-images"
+								class="col-md-12 col-md-offset-3"> <c:choose>
+									<c:when test="${not empty user.image}">
+										<p>
+											Edit <i class="fa fa-image"></i>
+										</p>
+
+									</c:when>
+									<c:otherwise>
+										Add <i class="fa fa-image"></i>
+										<i class="fa fa-plus"></i>
+									</c:otherwise>
+								</c:choose>
+							</a>
+						</div>
+
+
+
+						<div class="col-lg">
+
+							<div class="col-main col-sm-9 animated"
+								style="visibility: visible;">
+								<div class="my-account">
+									<div
+										class="">
+										<ul id="" class="list-group">
+											<li class="active"><a href="#acc_info" data-toggle="tab"
+												aria-expanded="true"> Account Detail </a></li>
+											<li class=""><a href="#acc_update" data-toggle="tab"
+												aria-expanded="false">Update Address</a></li>
+											<li class=""><a href="#acc_cards" data-toggle="tab"
+												aria-expanded="false">Cards</a></li>
+											<li class=""><a href="#acc_password" data-toggle="tab"
+												aria-expanded="false">Change Password</a></li>
+											<li class=""><a href="#acc_products" data-toggle="tab"
+												aria-expanded="false">My Products</a></li>
+										</ul>
+										<div id="productTabContent" class="tab-content">
+											<div class="tab-pane fade active in" id="acc_info">
+												<div class="col-main col-sm-8 animated"
+													style="visibility: visible;">
+													<div class="my-account">
+														<div class="page-title">
+															<h1>Account Information</h1>
+														</div>
+														<div class="line"></div>
+														<div class="dashboard">
+															<div class="panel-group accordion-faq" id="faq-accordion">
+																<div class="panel">
+																	<div class="panel-heading">
+																		<a data-toggle="collapse" data-parent="#faq-accordion"
+																			href="#question1"> <span class="arrow-down">+</span>
+																			<span class="arrow-up">&#8211;</span> Contact
+																		</a>
+																	</div>
+																	<div id="question1" class="panel-collapse collapse in">
+																		<div class="panel-body">
+																			<table class="table">
+																				<tr class="text-success">
+																					<th>Item</th>
+																					<th>Detail</th>
+
+																				</tr>
+																				<tr class="text-success">
+																					<td>Name <i class="fa fa-user"
+																						aria-hidden="true"></i></td>
+																					<td>${user.fname}${user.lname}</td>
+																				</tr>
+																				<tr class="text-success">
+																					<td>Email <i class="fa fa-envelope"
+																						aria-hidden="true"></i></td>
+																					<td>${user.email}</td>
+																				</tr>
+																				<tr class="text-success">
+																					<td>Phone <i class="fa fa-phone"
+																						aria-hidden="true"></i></td>
+																					<td><c:if
+																							test="${not empty user.getPhoneBook()}">
+																							<div class="panel">
+																								<div class="panel-heading">
+																									<a data-toggle="collapse"
+																										data-parent="#faq-accordion" href="#question6"
+																										class="collapsed"> <span
+																										class="arrow-down">+</span> <span
+																										class="arrow-up">&#8211;</span> Phone Numbers
+																									</a>
+																								</div>
+																								<div id="question6"
+																									class="panel-collapse collapse">
+																									<div class="panel-body">
+																										<p class="text-secondary">
+																											<c:set var="f" value="0" />
+																											<c:forEach var="fone"
+																												items="${user.getPhoneBook()}">
+																												<c:set var="f" value="${f+1}" />
+																												<span class="text-success">&nbsp;
+																													${f}. <b class="text-body">${fone.type}
+																												</b>${fone.tel}</span>&nbsp;
+								    		 <a href="deletetel?id=${fone.id}"
+																													onclick="confirmed(); return false;">
+																													<i class="fa fa-times text-danger"></i>
+																												</a>
+																											</c:forEach>
+																										</p>
+
+																									</div>
+																								</div>
+																							</div>
+																						</c:if></td>
+																				</tr>
+																				<tr class="text-success">
+																					<td>Address<i class="fa fa-home"></i></td>
+																					<td>${user.getAddress().street}
+																						${user.getAddress().city} ${user.getAddress().zip}</td>
+																				</tr>
+
+																			</table>
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!--dashboard-->
+													</div>
+
+
+												</div>
+
+
+
+												<div class="tab-pane fade" id="acc_update">
+													<div class="box-collateral box-tags">
+														<div class="col-main  animated"
+															style="visibility: visible;">
+															<div class="my-account">
+
+																<form:form action="updatecontact"
+																	modelAttribute="address" method="post"
+																	id="form-validate">
+																	<div class="fieldset group-select">
+																		<h2 class="legend">Contact Information</h2>
+																		<div class="col-main animated"
+																			style="visibility: visible;">
+																			<div class="my-account">
+																				<div class="page-title">
+																					<h1>Edit Account</h1>
+																				</div>
+																				<div class="line"></div>
+																				<div class="dashboard">
+
+																					<input name="id" type="hidden" value="${user.id}">
+
+																					<ul class="form-list">
+																						<li class="fields">
+																							<div class="customer-name">
+																								<div class="input-box name-firstname">
+																									<label for="firstname">First Name<span
+																										class="required">*</span></label>
+																									<div class="input-box1">
+																										<input type="text" id="firstname" name="fname"
+																											value="${user.fname}" title=""
+																											maxlength="255"
+																											class="input-text required-entry">
+																									</div>
+																								</div>
+																								<div class="input-box name-lastname">
+																									<label for="lastname">Last Name<span
+																										class="required">*</span></label>
+																									<div class="input-box1">
+																										<input type="text" id="lastname" name="lname"
+																											value="${user.lname}" title=""
+																											maxlength="255"
+																											class="input-text required-entry">
+																									</div>
+																								</div>
+																							</div>
+																						</li>
+																					</ul>
+
+																				</div>
+																			</div>
+																			<ul class="">
+																				<li class=""><label for="phone">Telephone<em
+																						class="required">*</em></label> <br> <form:input
+																						type="hidden" path="id" value="${user.id}" /> <form:input
+																						type="hidden" path="email" value="${user.email}" />
+																					<form:input class="input-text required-entry"
+																						path="phone" value="" placeholder="Enter phone" /></li>
+																			</ul>
+																		</div>
+																		<div class="fieldset group-select">
+																			<h2 class="legend">Address</h2>
+																			<ul class="">
+
+																				<li class="">
+																					<div class="field">
+																						<div class="input-box">
+																							<label for="street">Street Address<em
+																								class="required">*</em></label> <br>
+																							<form:input class="input-text required-entry"
+																								path="street" value=""
+																								placeholder="Enter Address" />
+																						</div>
+																					</div>
+																					<div class="field">
+																						<div class="input-box">
+																							<label for="city">City<em
+																								class="required">*</em></label> <br>
+																							<form:input class="input-text required-entry"
+																								path="city" value="" placeholder="Enter City" />
+																						</div>
+																					</div>
+																				</li>
+
+																				<li class="">
+
+																					<div class="field">
+																						<div class="input-box">
+																							<label for="zip">Zip/Postal Code<em
+																								class="required">*</em></label> <br>
+																							<form:input class="input-text required-entry"
+																								path="zip" value="" placeholder="Enter ZIP" />
+																						</div>
+																					</div>
+																					<div class="field">
+																						<div class="input-box">
+																							<label for="region_id">State/Province<em
+																								class="required">*</em></label> <br>
+																							<form:select class="input-text" id="region_id"
+																								path="state" required="true">
+																								<c:choose>
+																									<c:when test="${empty user.getAddress().state}">
+																										<option value="">Select State</option>
+																									</c:when>
+																									<c:otherwise>
+																										<option value="${user.getAddress().state}">
+																											${user.getAddress().state}</option>
+																									</c:otherwise>
+																								</c:choose>
+																								<c:forEach items="${states}" var="state">
+																									<option value="${state}">${state.id}</option>
+																								</c:forEach>
+																							</form:select>
+																						</div>
+																					</div>
+																				</li>
+
+																			</ul>
+																		</div>
+
+																		<div class="buttons-set">
+																			<p class="required">* Required Fields</p>
+																			<button type="submit" title=""
+																				class="button btn-info">
+																				<span>Save </span>
+																			</button>
+																		</div>
+																</form:form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>

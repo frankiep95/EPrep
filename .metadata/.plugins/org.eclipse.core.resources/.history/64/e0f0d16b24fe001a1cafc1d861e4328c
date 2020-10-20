@@ -1,0 +1,9 @@
+//spring.mvc.view.prefix: /WEB-INF/views/
+spring.mvc.view.suffix: .jsp
+spring.resources.static-locations=/resources/**,/static/**
+server.error.whitelabel.enabled=false
+
+server.port =2300
+server.servlet.context-path=/eprep
+server.servlet.session.timeout=15m
+

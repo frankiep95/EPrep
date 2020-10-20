@@ -1,0 +1,20 @@
+package com.prep.controller;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+@Controller
+public class AppController {
+
+	@GetMapping({"/","home"})
+	@ResponseBody
+	String index(Model model) {
+		model.addAttribute("msg","Welcome to spring MVC");
+		return "Welcome to spring MVC";
+	}
+
+}

@@ -1,0 +1,46 @@
+package com.prep.controller;
+
+import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.prep.model.Users;
+
+
+
+@Controller
+public class AppController {
+
+	@GetMapping({"/","home"})
+	//@ResponseBody
+	 public String index(Model model) {
+		model.addAttribute("msg","Welcome to spring MVC");
+		return "home";
+	}
+	
+	@GetMapping({"about"})
+	public String about(Model model) {
+		model.addAttribute("msg","about us");
+		return "about";
+	}
+	
+	@GetMapping({"contact"})
+	public String contact(Model model) {
+		model.addAttribute("msg","Contact Us");
+		return "contact";
+	}
+	
+	@GetMapping({"login"})
+	public String login(Model model) {
+		model.addAttribute("msg","Login");
+		return "login"; 
+	}
+	
+	@GetMapping({"register"})
+	public String signUp(Model model){	
+		model.addAttribute("msg", "Register");
+		model.addAttribute("users", new Users());	
+	return "signup";
+	}  
+}

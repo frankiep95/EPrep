@@ -1,0 +1,13 @@
+127.0.0.1 - - [01/Sep/2020:23:20:56 -0700] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [01/Sep/2020:23:21:15 -0700] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:21:17 -0700] "GET /ServletTutorial2/ HTTP/1.1" 200 2245
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:21:17 -0700] "GET /ServletTutorial2/styles/styles.css HTTP/1.1" 200 40
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:22:57 -0700] "GET /ServletTutorial2/ HTTP/1.1" 200 2245
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:22:57 -0700] "GET /ServletTutorial2/styles/styles.css HTTP/1.1" 200 40
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:22:57 -0700] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:22:59 -0700] "GET /ServletTutorial2/%C3%A2%E2%82%AC%C2%9DRegistrationServlet%C3%A2%E2%82%AC%C2%9D?firstName=&lastName=&email=&password=&street=&city=&state=&zipCode= HTTP/1.1" 404 833
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:22:59 -0700] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:23:17 -0700] "GET /ServletTutorial2/%C3%A2%E2%82%AC%C2%9DRegistrationServlet%C3%A2%E2%82%AC%C2%9D?firstName=Frankie&lastName=Pereira&email=&password=&street=&city=&state=&zipCode= HTTP/1.1" 404 833
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:23:39 -0700] "GET /ServletTutorial2/%C3%A2%E2%82%AC%C2%9DRegistrationServlet%C3%A2%E2%82%AC%C2%9D?firstName=Frankie&lastName=Pereira&email=fpereira1990%40hotmail.com&password=2134&street=234&city=werwer&state=ct&zipCode=23 HTTP/1.1" 404 833
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:23:59 -0700] "GET /ServletTutorial2/%C3%A2%E2%82%AC%C2%9DRegistrationServlet%C3%A2%E2%82%AC%C2%9D?firstName=Frankie&lastName=Pereira&email=fpereira1990%40hotmail.com&password=2134&street=234&city=werwer&state=ct&zipCode=23 HTTP/1.1" 404 833
+0:0:0:0:0:0:0:1 - - [01/Sep/2020:23:24:02 -0700] "GET /ServletTutorial2/%C3%A2%E2%82%AC%C2%9DRegistrationServlet%C3%A2%E2%82%AC%C2%9D?firstName=Frankie&lastName=Pereira&email=fpereira1990%40hotmail.com&password=&street=234&city=werwer&state=ct&zipCode=23 HTTP/1.1" 404 833

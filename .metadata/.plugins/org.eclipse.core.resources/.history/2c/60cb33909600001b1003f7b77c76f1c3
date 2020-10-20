@@ -1,0 +1,82 @@
+package com.example.eprep.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.eprep.dao.UserRepository;
+import com.example.eprep.model.Users;
+
+
+@Controller
+@SessionAttributes({"loggedInUser","role"})
+public class AppController {
+ private UserRepository userRepository;
+	@GetMapping({"/","home"})
+	//@ResponseBody
+	 public String index(Model model) {
+		model.addAttribute("msg","Welcome to spring MVC");
+		return "home";
+	}
+
+	@GetMapping({"about"})
+	public String about(Model model) {
+		model.addAttribute("msg","about us");
+		return "about";
+	}
+	
+	@GetMapping({"contact"})
+	public String contact(Model model) {
+		model.addAttribute("msg","Contact Us");
+		return "contact";
+	}
+	
+	@GetMapping({"login"})
+	public String login(Model model) {
+		model.addAttribute("msg","Login");
+		return "login"; 
+	}
+	
+	@GetMapping({"register"})
+	public String signUp(Model model){	
+		model.addAttribute("msg", "Register");
+		model.addAttribute("users", new Users());	
+	return "signup";
+	}  
+	
+	@GetMapping({"profile"})
+	public String profile(@SessionAttribute(required = false) String loggedInUser, Model model) {
+		try {
+			//if user is not in session return login page expired session
+			if(loggedInUser.isEmpty() && loggedInUser !=null) {
+				model.addAttribute("error", "Expired session, please Login");
+				return "login";
+			}
+			userRepository.findByEmail(loggedInUser).ifPresent(a->{
+			model.addAttribute("user_account",a);
+		});
+			model.addAttribute("page", "Profile");
+			
+		}catch(Exception e) {
+			e.printStackTrace();}
+		return "profile";
+	}
+	
+	@PostMapping("register")
+	public String register(@ModelAttribute("user") Users user, Model model) {
+		model.addAttribute("loggedInUser", user.getEmail());
+		model.addAttribute("role", user.getRole());
+		return "profile";
+	}
+
+}

@@ -1,0 +1,28 @@
+
+Sep 16, 2020 22:37:31.49 NEW SESSION
+Sep 16, 2020 22:37:31.49 
+Sep 16, 2020 22:37:31.50 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+Sep 16, 2020 22:37:31.50 
+Sep 16, 2020 23:07:27.530 
+Sep 16, 2020 23:07:27.530 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+Sep 16, 2020 23:07:27.530 
+Sep 16, 2020 23:47:19.856 
+Sep 16, 2020 23:47:19.856 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+Sep 16, 2020 23:47:19.857 
+Sep 16, 2020 23:47:19.959 
+Sep 16, 2020 23:47:19.959 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+Sep 16, 2020 23:47:19.959 
+
+Sep 17, 2020 21:56:54.762 NEW SESSION
+Sep 17, 2020 21:56:54.762 [Parent 8368, Gecko_IOThread] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc, line 166
+Sep 17, 2020 21:56:54.777 
+Sep 17, 2020 21:56:54.778 ###!!! [Child][MessageChannel] Error: (msgtype=0x5A000D,name=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+Sep 17, 2020 21:56:54.778 
+Sep 17, 2020 21:56:55.103 
+Sep 17, 2020 21:56:55.104 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+Sep 17, 2020 21:56:55.104 
+
+Sep 23, 2020 23:32:18.430 NEW SESSION
+Sep 23, 2020 23:32:18.430 
+Sep 23, 2020 23:32:18.430 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+Sep 23, 2020 23:32:18.431 

@@ -1,0 +1,42 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<header id="header">
+	<a class="logo" href="index.html">E-Prep</a>
+	<nav>
+		<div>
+
+				<c:choose>
+					<c:when test="${empty loggedInUser}">
+						<a class="button primary" href="login">Log In</a>
+						<a class="button pimary" href="signup">Register</a>
+					</c:when>
+					<c:otherwise>
+						<%--             	<c:if test="${fn:contains(role,'ADMINDBA')}"> --%>
+						<c:if test="${role eq 'ADMIN' || role eq 'DBA'}">
+							<div class="login">
+								<a href="admin"><span class="hidden-xs">admin</span></a>
+							</div>
+						</c:if>
+						<div class="myaccount">
+							<a title="My Account" href="profile"><span class="hidden-xs">My
+									Account</span></a>
+						</div>
+						<div class="myaccount">
+							<a title="My Account" href="logout"><span class="hidden-xs">Logout</span></a>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
+
+
+		</div>
+	</nav>
+</header>
+<nav id="menu">
+	<ul class="links">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="elements.html">Elements</a></li>
+		<li><a href="generic.html">Generic</a></li>
+	</ul>
+	<a href="#menu" class="close"></a>
+</nav>

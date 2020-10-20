@@ -1,0 +1,7 @@
+package com.prep.controller;
+
+import org.springframework.data.rest.webmvc.ControllerUtils;
+
+public class AppController extends ControllerUtils {
+
+}

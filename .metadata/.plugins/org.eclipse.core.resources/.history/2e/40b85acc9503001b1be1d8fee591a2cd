@@ -1,0 +1,67 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="home">Eprep</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+		      <a class="nav-link" href="home">Home</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="about">About</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="contact">Contact Us</a>
+		    </li>
+	        </ul>
+        	<ul class="navbar-nav">
+        	
+        	<c:choose>
+               <c:when test="${empty loggedInUser}">
+                <li class="nav-item">
+                <a class="nav-link" href="login">Login</a>
+	            </li>
+	            <li class="nav-item">
+	                <a class="nav-link" href="register">Register</a>
+	            </li>
+                </c:when>
+                <c:otherwise>
+                <li class="nav-item">
+                <a class="nav-link" href="profile"><i class="fa fa-user"></i> Profile</a>
+                <c:if test="${role eq 'ADMIN'}">
+                <li class="nav-item">
+                <a class="nav-link" href="admin">Admin</a>
+                </li>
+                </c:if>
+                <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
+                </c:otherwise>
+           </c:choose>   
+                
+            <li class="nav-item text-right">
+		      <form class="form-inline" action="#">
+			    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+			    <button class="btn btn-success" type="submit">Search</button>
+			  </form>
+		    </li>
+        </ul>
+    </div>
+  </nav>
+  
+  <section class="hero hero-page gray-bg padding-small" style="background-color:#99A3A4">
+	      <div class="container"><br>
+	        <div class="row d-flex">
+	          <div class="col-lg-9 order-2 order-lg-1 text-white">
+	            <h1>${page}</h1>
+	          </div>
+	          <div class="col-lg-3 text-right order-1 order-lg-2">
+	            <ul class="breadcrumb justify-content-lg-end">
+	              <li class="breadcrumb-item"><a href="home">Home</a></li>
+	              <li class="breadcrumb-item active">${page}</li>
+	            </ul>
+	          </div>
+	        </div>
+	      </div>
+         </section>

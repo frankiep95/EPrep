@@ -1,0 +1,9 @@
+
+spspring.mvc.view.suffix: .jsp
+spring.resources.static-locations=/resources/**,/static/**
+server.error.whitelabel.enabled=false
+
+server.port =2300
+server.servlet.context-path=/capstone
+servlet.session.timeout=15m
+ring.mvc.view.prefix: /WEB-INF/views/

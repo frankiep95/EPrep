@@ -1,0 +1,5 @@
+package com.prep.dao;
+
+public interface UsersRepository {
+
+}

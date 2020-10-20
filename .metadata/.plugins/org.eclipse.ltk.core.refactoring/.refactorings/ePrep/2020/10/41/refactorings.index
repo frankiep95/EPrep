@@ -1,0 +1,12 @@
+1601860443846	Move 'static' to 'webapp'
+1601861181591	Delete element
+1601861709474	Delete element
+1601861787420	Move 'assets' to 'static'
+1601861789647	Move 'images' to 'static'
+1601862383628	Delete element
+1601862394822	Rename resource 'WEB-INF1'
+1601862646672	Copy file
+1601862654407	Delete element
+1601862662241	Rename resource 'home2.jsp'
+1601863220055	Rename package 'com.eprep.controller'
+1601873569456	Delete element

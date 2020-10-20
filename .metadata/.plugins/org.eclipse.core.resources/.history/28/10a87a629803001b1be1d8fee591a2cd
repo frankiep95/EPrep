@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Contact Us!</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<jsp:include page="components/header.jsp"/>
+
+<div class="container">
+
+<form action="sendemail" method="post" role="form">
+            
+                  <fieldset>
+                    <legend>New Address</legend>
+                      
+                          <div class="">                          
+                            <label for="name"> Full Name<span class="required">*</span></label>
+                            <br>
+                            <input type="text" id="name" name="name" placeholder="Full Name" title="Full Name" class="input-text" required>
+                         
+                          <div class="input-box">
+                            <label for="email"> Email Address <span class="required">*</span> </label>
+                            <br>
+                            <input type="text" id="email" name="email" placeholder="E-mail"  title="E-mail" class="input-text" required>
+                          </div>
+                          <div class="input-box ">
+                            <label for="subject"> Subject <span class="required">*</span> </label>
+                            <br>
+                            <input type="text" name="subject" placeholder="subject" title="Subject" class="input-text">
+                          </div>
+                        </div>
+                      
+                        <label for="comment">Comment<em class="required">*</em></label>
+                        <br>
+                        <div >
+                          <textarea name="message" id="message" title="message" class="input-text" cols="5" rows="3"></textarea>
+                        </div>
+                   
+                  </fieldset>
+             
+                <span class="require"><em class="required">* </em>Required Fields</span>
+                <div class="buttons-set">
+                  <button type="submit" title="Submit" class="button submit"> <span> Submit </span> </button>
+                </div>
+             
+            </form>
+     </div>
+     
+</body>
+</html>

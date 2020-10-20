@@ -1,0 +1,28 @@
+1599956928430	Move 'web.xml' to 'lib'
+1599956933152	Move 'web.xml' to 'WEB-INF'
+1599956943898	Copy file
+1600057720989	Delete element
+1600142008285	Delete element
+1600142758666	Move file
+1600142785532	Move 'inventory.csv' to 'CarOSell'
+1600230101700	Rename type 'InventoryServlet'
+1600230137249	Rename type 'usedCars'
+1600230326981	Move file
+1600230373607	Delete element
+1600230434415	Move 'usedCars.jsp' to 'WebContent'
+1600230471873	Delete element
+1600233183620	Move 'inventor.csv' to 'CarOSell'
+1600233394940	Delete element
+1600233430470	Delete element
+1600233896969	Delete element
+1600234786573	Copy file
+1600235004791	Delete element
+1600236602242	Delete element
+1600237719461	Delete element
+1600238312377	Move 'inventory.csv' to 'CarOSell'
+1600319530704	Move file
+1600319885409	Move 'inventory.csv' to 'WEB-INF'
+1600406500944	Delete element
+1600406506178	Delete element
+1600406533421	Delete element
+1600548294109	Move 'photos' to 'WebContent'

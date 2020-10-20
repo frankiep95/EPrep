@@ -1,0 +1,110 @@
+package com.example.eprep.controller;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.eprep.dao.RoleRepository;
+import com.example.eprep.dao.UserRepository;
+import com.example.eprep.model.Products;
+import com.example.eprep.model.Role;
+import com.example.eprep.model.Users;
+
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+
+	@PostMapping("editrole")
+	public String editrole(@RequestParam Long id, @RequestParam String role, RedirectAttributes redirect) {
+		try {
+			userRepository.findById(id).ifPresent(
+					a->{
+						a.setRole(role);
+						if(role.equals("ADMIN")) {
+							a.setRoles(new HashSet<Role>(roleRepository.findAll()));
+							userRepository.save(a);
+						}
+						else {
+							a.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findByRole(role))));
+							userRepository.save(a);
+						}
+					});
+			redirect.addFlashAttribute("success", role + " Role Granted");
+		}catch(Exception e) {
+			e.printStackTrace();
+			redirect.addFlashAttribute("success", "Operation Fail");
+		}
+		return "redirect:/admin";
+			
+			}
+
+		//Query database and drop a list in admin page this will render users details
+	@GetMapping({"admin"})
+	public String admin(Model model) {
+		model.addAttribute("msg","Admin");
+		model.addAttribute("list",userRepository.findAll());
+
+		return "admin";
+	}
+	
+	//add mapping to delete user in the controller
+	@GetMapping({"removeuser"})
+	public String deleteUser(Model model,@RequestParam Long id,RedirectAttributes redirect) {
+		try {
+			userRepository.deleteById(id);
+			redirect.addFlashAttribute("success","Delete success");
+			redirect.addFlashAttribute("list",userRepository.findAll());
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("error", "Delete Fail");
+		}
+		return "redirect:admin";
+		}
+	
+	@PostMapping("customsearch")
+	public String customSearch(@RequestParam String email, @RequestParam String lname, Model model) {
+		//model.addAttribute("page", "Admin");
+		model.addAttribute("list",userRepository.customSearchUser(lname, email));
+
+		return "admin";
+		}
+	
+	@PostMapping("updateUsers")
+	public String update(@ModelAttribute Users user, Model model , RedirectAttributes red) {
+		try {
+			userRepository.findById(user.getId()).ifPresent(a->{
+				a.setFname(user.getFname());
+				a.setLname(user.getLname());
+				a.setRole(user.getRole());
+				userRepository.save(a);
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:admin";
+	}
+
+	@ModelAttribute("user")
+	public Users user() {
+		return new Users();
+	}
+	
+	@ModelAttribute("product")
+	Products prod() {
+		return new Products();
+	}
+}

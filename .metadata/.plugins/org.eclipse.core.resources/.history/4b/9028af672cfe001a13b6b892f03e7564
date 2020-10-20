@@ -1,0 +1,17 @@
+package com.prep.controller;
+
+import org.springframework.data.rest.webmvc.ControllerUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+@Controller
+public class AppController extends ControllerUtils {
+
+	@GetMapping("home")
+	// @ResponseBody
+	public String index(Model model) {
+		model.addAttribute("msg","Welcome to spring MVC");
+		return "home";
+	}
+
+}

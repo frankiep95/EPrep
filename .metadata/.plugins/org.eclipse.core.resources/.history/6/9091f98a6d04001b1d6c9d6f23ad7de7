@@ -1,0 +1,5 @@
+package com.example.eprep.utils;
+
+public enum States {
+
+}

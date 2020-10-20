@@ -1,0 +1,19 @@
+2020-10-03 14:49:58.373 - Load database object list
+2020-10-03 14:49:58.374 - 	Load mysql8-174f06def14-68e4ec8c5f35e4e5/eprep
+2020-10-03 14:49:58.375 - MySQL script
+2020-10-03 14:49:58.375 - 	MySQL script
+2020-10-03 14:49:58.375 - MySQL script
+2020-10-03 14:49:58.375 - 	Start native tool
+2020-10-03 14:49:58.691 - IO error: File 'C:\WINDOWS\system32' doesn't exist
+2020-10-03 14:49:58.692 - java.io.IOException: File 'C:\WINDOWS\system32' doesn't exist
+	at org.jkiss.dbeaver.ext.mysql.tasks.MySQLScriptExecuteHandler.startProcessHandler(MySQLScriptExecuteHandler.java:73)
+	at org.jkiss.dbeaver.ext.mysql.tasks.MySQLScriptExecuteHandler.startProcessHandler(MySQLScriptExecuteHandler.java:1)
+	at org.jkiss.dbeaver.tasks.nativetool.AbstractNativeToolHandler.executeProcess(AbstractNativeToolHandler.java:169)
+	at org.jkiss.dbeaver.tasks.nativetool.AbstractNativeToolHandler.doExecute(AbstractNativeToolHandler.java:241)
+	at org.jkiss.dbeaver.tasks.nativetool.AbstractNativeToolHandler.lambda$0(AbstractNativeToolHandler.java:52)
+	at org.jkiss.dbeaver.registry.task.TaskRunJob.run(TaskRunJob.java:124)
+	at org.jkiss.dbeaver.tasks.nativetool.AbstractNativeToolHandler.executeTask(AbstractNativeToolHandler.java:44)
+	at org.jkiss.dbeaver.registry.task.TaskRunJob.executeTask(TaskRunJob.java:119)
+	at org.jkiss.dbeaver.registry.task.TaskRunJob.run(TaskRunJob.java:88)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
