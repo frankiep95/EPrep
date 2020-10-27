@@ -3,6 +3,7 @@ package com.prep.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,29 @@ public class Equipment {
 	@OneToMany(mappedBy="equipment", cascade=CascadeType.ALL)
 	private List<RepairOrder> repairOrder;
 
+	@Column(name="equipType")
+	private String equipType;
 
+	@Column(name="equipName")
+	private String equipName;
+	
+	
+	
+	public String getEquipName() {
+		return equipName;
+	}
+
+	public void setEquipName(String equipName) {
+		this.equipName = equipName;
+	}
+
+	public String getEquipType() {
+		return equipType;
+	}
+
+	public void setEquipType(String equipType) {
+		this.equipType = equipType;
+	}
 
 	public Long getId() {
 		return id;

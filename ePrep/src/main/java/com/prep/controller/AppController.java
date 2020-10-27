@@ -56,10 +56,7 @@ public class AppController {
 		model.addAttribute("users", new Users());
 		return "signup";
 	}
-	@GetMapping("preps")
-	public String prep(Model model) {
-		return "preps";
-	}
+
 	
 	
 	@GetMapping("myname")

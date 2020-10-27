@@ -28,9 +28,7 @@ public class Trailers {
 	
 	@Column(table = "equipment")
 	private String equipType = "trailer";
-	
-	@Column(table = "equipment")
-	private String equipName = this.getTrailerName();
+
 	
 	@ManyToMany(cascade = CascadeType.DETACH)
 	@JoinTable(name="equipment_status",joinColumns=
@@ -42,6 +40,9 @@ public class Trailers {
 	private String lastService;
 	private Long miles;
 	private String plateNumber;
+	
+	@Column(table = "equipment")
+	private String equipName = trailerName;
 	
 	@OneToOne(mappedBy = "trailer", cascade = CascadeType.ALL)
 	private Generator generator;

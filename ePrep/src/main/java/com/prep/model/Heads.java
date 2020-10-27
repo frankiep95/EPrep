@@ -33,8 +33,7 @@ public class Heads {
 	@Column(table="equipment")
 	private String equipType = "head";
 	
-	@Column(table =" equipment")
-	private String equipName = this.getHeadname();
+	
 	
 
 	@ManyToMany(cascade = CascadeType.DETACH)
@@ -68,6 +67,9 @@ public class Heads {
 	private String panencoder;
 	private String tiltencoder;
 	private String dimensions; //picture
+	
+	@Column(table =" equipment")
+	private String equipName = this.getHeadname();
 	
 	@OneToOne(mappedBy = "head", cascade = CascadeType.ALL)
 	private Joysticks joystick;

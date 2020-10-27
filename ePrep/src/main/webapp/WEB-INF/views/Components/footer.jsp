@@ -15,8 +15,6 @@
 							</ul>
 						</section>
 					</div>
-					<div class="copyright">
-						© Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
-					</div>
+			
 				</div>
 			</footer>

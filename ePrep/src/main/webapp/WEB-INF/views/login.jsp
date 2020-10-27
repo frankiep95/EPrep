@@ -29,8 +29,7 @@
 		<div class="inner">
 			<div class="content">
 
-				<h3>
-					<small class="text-danger">${error} ${param.error}</small> <br>${msg}</h3>
+				<h3>${msg}</h3>
 				<form action="login" method="POST">
 					<div class="content">
 						<p>If you have an account with us, please log in.</p>

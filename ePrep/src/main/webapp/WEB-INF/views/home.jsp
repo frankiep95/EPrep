@@ -5,21 +5,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css"
-	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-	crossorigin="anonymous">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico"/>
+    <link rel="stylesheet" href="static/assets/css/main.css">
+    <script src="static/jquery.sticky.bootstrap.tabs.js"></script>
+    <script>
+    $(function() {
+      var options = { backToTop: true };
+      $('.nav-tabs-sticky').stickyTabs(options);
+    });
+    </script>
 <title>E-Prep</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<link rel="stylesheet" href="static/assets/css/main.css">
+
 </head>
 <body>
 	<br>
@@ -46,7 +51,7 @@
 	<section class="wrapper">
 		<div class="inner">
 			<div id="carouselExampleSlidesOnly" class="carousel slide"
-				data-ride="carousel" data-wrap="true">
+				data-ride="carousel" data-interval="2000">
 				<div class="carousel-inner">
 					<div class="carousel-item">
 						<img src="static/images/camera1.jpg" class="d-block w-100" alt="">
@@ -153,6 +158,8 @@
 	<script src="static/assets/js/breakpoints.min.js"></script>
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
@@ -164,7 +171,8 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
 		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-
+	<script type="text/javascript"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>

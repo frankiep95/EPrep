@@ -52,16 +52,16 @@ public class Users {
 	private Set<Work> work=new HashSet<Work>();
 
 	@ManyToMany(cascade = CascadeType.DETACH)
-	@JoinTable(name="user_role",joinColumns=
+	@JoinTable(name="user_permissions",joinColumns=
 	@JoinColumn(name="user_id"),
-	inverseJoinColumns= @JoinColumn(name="role_id"))
-	private Set<Role> roles=new HashSet<Role>();
+	inverseJoinColumns= @JoinColumn(name="permissions_id"))
+	private Set<Permissions> permissions=new HashSet<Permissions>();
 	
 	@ManyToMany(cascade = CascadeType.DETACH)
-	@JoinTable(name="user_job",joinColumns=
+	@JoinTable(name="user_roles",joinColumns=
 	@JoinColumn(name="user_id"),
-	inverseJoinColumns= @JoinColumn(name="job_id"))
-	private Set<Jobs> job=new HashSet<Jobs>();
+	inverseJoinColumns= @JoinColumn(name="role_id"))
+	private Set<Roles> roles=new HashSet<Roles>();
 
 	public Long getId() {
 		return id;
@@ -143,20 +143,20 @@ public class Users {
 		this.work = work;
 	}
 
-	public Set<Role> getRoles() {
+	public Set<Permissions> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<Permissions> permissions) {
+		this.permissions = permissions;
+	}
+
+	public Set<Roles> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<Roles> roles) {
 		this.roles = roles;
-	}
-
-	public Set<Jobs> getJob() {
-		return job;
-	}
-
-	public void setJob(Set<Jobs> job) {
-		this.job = job;
 	}
 
 	
@@ -182,9 +182,15 @@ public class Users {
 	public String toString() {
 		return "Users [id=" + id + ", fname=" + fname + ", lname=" + lname + ", image=" + image + ", email=" + email
 				+ ", username=" + username + ", role=" + role + ", password=" + password + ", password2=" + password2
-				+ ", PhoneBook=" + PhoneBook + ", address=" + address + ", work=" + work + ", roles=" + roles + ", job="
-				+ job + "]";
+				+ ", PhoneBook=" + PhoneBook + ", address=" + address + ", work=" + work + ", permissions="
+				+ permissions + ", roles=" + roles + "]";
 	}
+
+
+
+
+
+
 
 
 

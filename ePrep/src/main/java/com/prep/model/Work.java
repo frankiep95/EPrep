@@ -1,5 +1,6 @@
 package com.prep.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,12 +8,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 
@@ -28,8 +28,8 @@ public class Work {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "work_id")
 	private Long Id;
-	private String startdate;
-	private String enddate;
+	private Date startdate;
+	private Date enddate;
 	private String jobname;
 	private String productioncompany;
 
@@ -44,22 +44,52 @@ public class Work {
 	private Long precisionDriver;
 	private Long craneOperator;
 	private Long technician;
+	
+	
+	
+	
+	
+	
+	public Work() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Work(Long id, Date startdate, Date enddate, String jobname, String productioncompany, String calltime,
+			String wraptime, String hoursworked, List<RepairOrder> repairOrder, String jobDescription, String jobNotes,
+			Long packageDriver, Long precisionDriver, Long craneOperator, Long technician) {
+		super();
+		Id = id;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.jobname = jobname;
+		this.productioncompany = productioncompany;
+		this.calltime = calltime;
+		this.wraptime = wraptime;
+		this.hoursworked = hoursworked;
+		this.repairOrder = repairOrder;
+		this.jobDescription = jobDescription;
+		this.jobNotes = jobNotes;
+		this.packageDriver = packageDriver;
+		this.precisionDriver = precisionDriver;
+		this.craneOperator = craneOperator;
+		this.technician = technician;
+	}
 	public Long getId() {
 		return Id;
 	}
 	public void setId(Long id) {
 		Id = id;
 	}
-	public String getStartdate() {
+	public Date getStartdate() {
 		return startdate;
 	}
-	public void setStartdate(String startdate) {
+	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
-	public String getEnddate() {
+	public Date getEnddate() {
 		return enddate;
 	}
-	public void setEnddate(String enddate) {
+	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
 	public String getJobname() {
@@ -142,7 +172,10 @@ public class Work {
 				+ ", jobNotes=" + jobNotes + ", packageDriver=" + packageDriver + ", precisionDriver=" + precisionDriver
 				+ ", craneOperator=" + craneOperator + ", technician=" + technician + "]";
 	}
-
+	
+	
+	
+	
 
 	
 	

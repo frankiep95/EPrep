@@ -29,21 +29,19 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.prep.dao.AddressRepository;
+import com.prep.dao.EquipmentRepository;
+import com.prep.dao.HeadsRepository;
 import com.prep.dao.PhoneBookRepository;
-import com.prep.dao.RoleRepository;
-import com.prep.model.Addressess;
-import com.prep.model.PhoneBook;
-import com.prep.model.Users;
+import com.prep.dao.WorkRepository;
 import com.prep.service.UsersService;
 import com.prep.utils.DataValidation;
 import com.prep.utils.States;
 import com.prep.utils.WebUtils;
 
-
+import com.prep.model.*;
 
 @Controller
-@SessionAttributes({"loggedInUser","role"})
+@SessionAttributes({"loggedInUser","permissions"})
 public class UsersController {
 	
 	@Autowired
@@ -57,16 +55,18 @@ public class UsersController {
 	private DataValidation dataValidation;
 	
 	@Autowired
-	private AddressRepository addressRepository;
-
-
+	private WorkRepository workRepository;
 	
 	@Autowired
 	private PhoneBookRepository phoneBookRepository;
 	
+	
 	@Autowired
-	private RoleRepository roleRepository;
+	EquipmentRepository equipmentRepository;
 
+	@Autowired 
+	HeadsRepository heads;
+	
 	@PostMapping("register")
 	@Transactional
 	public String register(@ModelAttribute("users") Users user, Model model, BindingResult result, RedirectAttributes red) {	
@@ -83,13 +83,14 @@ public class UsersController {
 			model.addAttribute("user", user);
 			model.addAttribute("loggedInUser", user.getEmail());
 			//List<String> roles=user.getRoles().stream().map(x-> x.getRole()).distinct().collect(Collectors.toList());
-			model.addAttribute("role", user.getRoles().stream().map(x-> x.getRole()).distinct().collect(Collectors.toList()));
+			model.addAttribute("permissions", user.getPermissions().stream().map(x-> x.getPermissions()).distinct().collect(Collectors.toList()));
 		
 	    return "profile";
 	}
 	
 	@GetMapping("profile") 
-	  String profile(@SessionAttribute(required = false) String loggedInUser, Model model) {
+	  String profile(@SessionAttribute(required = false) String loggedInUser, @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+		        @RequestParam(value = "size", defaultValue = "10", required = false) Integer size, Model model) {
 		
 		
 	     try {
@@ -105,10 +106,18 @@ public class UsersController {
 			 if(a.getAddress()!=null) {
 			    model.addAttribute("address", a.getAddress());	 
 			 }
+			 model.addAttribute("users", "active");
 
+ 	    	Page<Users> findAllPagable = Userservice.findAll(PageRequest.of(page, size, Sort.by("fname")));				
+				model.addAttribute("list", findAllPagable);
+			Page<Work> findAllWorkPagable = workRepository.findAll(PageRequest.of(page, size));
+				model.addAttribute("works",findAllWorkPagable);
+			Page<Equipment> findAllEquip = equipmentRepository.findAll(PageRequest.of(page, size));
+				model.addAttribute("equip", findAllEquip);
 			 });
-			
+			 
 			 model.addAttribute("page", "Profile");
+			
 			
 	     } catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -124,8 +133,8 @@ public class UsersController {
 	 //add user email and role in session
 	  if(user.isPresent()) {
 		  model.addAttribute("loggedInUser", email);
-		  model.addAttribute("role", user.get().getRoles().stream().map(x-> x.getRole()).distinct().collect(Collectors.toList()));
-		  
+		  model.addAttribute("permissions", user.get().getPermissions().stream().map(x-> x.getPermissions()).distinct().collect(Collectors.toList()));
+
 		  
 	  }else {
 		  redirect.addFlashAttribute("error", "Sorry Invalid Credentials");
@@ -190,30 +199,26 @@ public class UsersController {
 	}
 	
 	
-	@GetMapping({"admin"})
-	public String users(Model model, @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-				        @RequestParam(value = "size", defaultValue = "10", required = false) Integer size, @SessionAttribute(required = false) String role ,RedirectAttributes red) {
-    	    
-    	    try {
-    	    	if(role.equals("USER")) {    	    		
-    	    		return "redirect:profile?protected=true";
-    	    	}
-    	    	if(role ==null || role.isEmpty()) {
-    	    		 model.addAttribute("error", "Please Login");
-    	    		return "login";
-    	    	}
-    	    	model.addAttribute("users", "active");
-    	    	Page<Users> findAllPagable = Userservice.findAll(PageRequest.of(page, size, Sort.by("fname")));				
-				model.addAttribute("list", findAllPagable);
-				model.addAttribute("msg"," Users found");
-			  } catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		
-		return "profile";
-		
-	}
+	/*
+	 * @GetMapping("getEmployees") public String users(Model
+	 * model, @RequestParam(value = "page", defaultValue = "0", required = false)
+	 * Integer page,
+	 * 
+	 * @RequestParam(value = "size", defaultValue = "10", required = false) Integer
+	 * size,RedirectAttributes red) {
+	 * 
+	 * try {
+	 * 
+	 * model.addAttribute("users", "active"); Page<Users> findAllPagable =
+	 * Userservice.findAll(PageRequest.of(page, size, Sort.by("fname")));
+	 * model.addAttribute("list", findAllPagable);
+	 * model.addAttribute("msg"," Users found"); } catch (Exception e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); }
+	 * 
+	 * return "redirect:profile#employees";
+	 * 
+	 * }
+	 */
 	
 	@PostMapping("updateUsers")
 	public String update(@ModelAttribute Users user, Model model, RedirectAttributes red) {	
@@ -239,7 +244,7 @@ public class UsersController {
 		//red.addFlashAttribute("error", "User Exists");
 			
 		
-	  return "redirect:admin";
+	  return "redirect:profile";
 	}
 	
 	@PostMapping("/addimages")
@@ -302,13 +307,21 @@ public class UsersController {
 		
 		return "admin";
 	}
+
 	
+	@PostMapping("editpermissions")
+	public String editPermissions(Model model, @RequestParam String permissions, @RequestParam Long id) {
+		
+		Userservice.editPermissions(permissions, id);
+		
+		return "redirect:profile#employees";
+	}
 	@PostMapping("editrole")
-	public String editrole(Model model, @RequestParam String role, @RequestParam Long id) {
+	public String editRole(Model model, @RequestParam String roles, @RequestParam Long id) {
 		
-		Userservice.editRoles(role, id);
+		Userservice.editRoles(roles, id);
 		
-		return "redirect:admin";
+		return "redirect:profile#employees";
 	}
 	
 	@PostMapping("seachByemailOrlastname")
@@ -339,8 +352,7 @@ public class UsersController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:profile#settings";	
-		
+		return "redirect:profile#edit-profile";
 	}
 	
 
@@ -406,6 +418,43 @@ public class UsersController {
 		
 		return "redirect:profile";
 		
+	}
+	
+	
+	@PostMapping("addwork")
+	public String addWork(@ModelAttribute Work work, Model model, BindingResult result) {
+		
+		try{
+			
+			workRepository.save(work);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "redirect:profile#dashboard";
+		}
+		
+		return "redirect:profile#dashboard";
+	}
+	
+	@ModelAttribute("work")
+	Work work() {
+		return new Work();
+	}
+	
+	@PostMapping("addhead")
+	public String addhead(@ModelAttribute Heads head, Model model, BindingResult result) {
+		dataValidation.headValidate(head, result);
+		if (result.hasErrors()) {
+		model.addAttribute("statusmsg", "Head Already Exists!");
+		return "redirect:profile#equipment";
+		}
+		heads.save(head);
+		model.addAttribute("statusmsg", "Head Added Successfully!");		
+		return "redirect:profile#equipment";
+	}
+	@ModelAttribute("head")
+	Heads head(){
+		return new Heads();
 	}
 	
 	@ModelAttribute("sizes")

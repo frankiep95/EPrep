@@ -34,7 +34,9 @@ public interface UsersService {
 	
 	Optional<Users> findById(Long id);
 	
-	void editRoles(String role, Long id);
+	void editPermissions(String permissions, Long id);
+	
+	void editRoles(String roles, Long id);
 	
 	void updatecontact(Addressess addressess);
 

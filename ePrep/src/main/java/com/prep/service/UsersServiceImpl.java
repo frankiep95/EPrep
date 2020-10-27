@@ -13,12 +13,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.prep.dao.RoleRepository;
+import com.prep.dao.PermissionsRepository;
+import com.prep.dao.RolesRepository;
 import com.prep.dao.UsersRepository;
 import com.prep.model.Addressess;
-import com.prep.model.Role;
-import com.prep.model.Users;
 
+import com.prep.model.Users;
+import com.prep.model.Permissions;
+import com.prep.model.Roles;
 
 
 @Service
@@ -29,7 +31,10 @@ public class UsersServiceImpl implements UsersService {
 	private UsersRepository userRepository;
 	
 	@Autowired 
-	RoleRepository roleRepository;
+	PermissionsRepository permissionsRepository;
+	
+	@Autowired
+	RolesRepository rolesRepository;
 
 	@Override
 	public Optional<Users> findByEmail(String email) {		
@@ -83,18 +88,27 @@ public class UsersServiceImpl implements UsersService {
 	
 
 	@Override
-	public void editRoles(String role, Long id) {		
+	public void editPermissions(String permissions, Long id) {		
 		//userRepository.findById(id).get().setRole(role);
 		userRepository.findById(id).
 		ifPresent(a->{
-			if(role.equals("ADMIN")) {
-				a.setRoles(new HashSet<Role>(roleRepository.findAll()));
+			if(permissions.equals("ADMIN")) {
+				a.setPermissions(new HashSet<Permissions>(permissionsRepository.findAll()));
 			}
 			else {
-				a.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findByRole(role))));
+				a.setPermissions(new HashSet<Permissions>(Arrays.asList(permissionsRepository.findByPermissions(permissions))));
 			}				
 		});
 
+		
+	}
+	
+	@Override
+	public void editRoles(String roles, Long id) {
+		userRepository.findById(id).ifPresent(a->{
+			a.setRoles(new HashSet<Roles>(Arrays.asList(rolesRepository.findByRoles(roles))));
+			
+		});
 		
 	}
 

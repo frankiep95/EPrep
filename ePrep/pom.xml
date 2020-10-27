@@ -41,6 +41,9 @@
 			<version>5.2.2.RELEASE</version>
 		</dependency>
 
+
+
+
 		<!-- RabbitMQ Starter Dependency -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
