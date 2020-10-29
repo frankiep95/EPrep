@@ -2,6 +2,7 @@ package com.prep.model;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -63,6 +64,9 @@ public class Users {
 	inverseJoinColumns= @JoinColumn(name="role_id"))
 	private Set<Roles> roles=new HashSet<Roles>();
 
+	@OneToMany(mappedBy="initiator", cascade=CascadeType.ALL)
+	private List<RepairOrder> repairOrder;
+	
 	public Long getId() {
 		return id;
 	}

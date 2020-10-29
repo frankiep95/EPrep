@@ -33,7 +33,10 @@ public class RepairOrder {
 	@JoinColumn(name="equipment_id")
 	private Equipment equipment;
 	
-	private Long initiator; //who wrote up issue
+	@ManyToOne(cascade=CascadeType.DETACH)
+	@JoinColumn(name="users_id")
+	private Users initiator; //who wrote up issue
+	
 	private Long role;   //what was their positon on this job
 	private String problemDescription; // what is the problem
 	private String solutionDescription; // what was the solution
@@ -71,11 +74,12 @@ public class RepairOrder {
 		this.equipment = equipment;
 	}
 
-	public Long getInitiator() {
+
+	public Users getInitiator() {
 		return initiator;
 	}
 
-	public void setInitiator(Long initiator) {
+	public void setInitiator(Users initiator) {
 		this.initiator = initiator;
 	}
 
@@ -167,6 +171,7 @@ public class RepairOrder {
 				+ issueDate + ", hoursWorked=" + hoursWorked + ", status=" + status + ", partsUsed=" + partsUsed
 				+ ", ifiles=" + ifiles + "]";
 	}
+
 
 	
 

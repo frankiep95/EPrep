@@ -67,6 +67,7 @@ public class Heads {
 	private String panencoder;
 	private String tiltencoder;
 	private String dimensions; //picture
+	private String location;
 	
 	@Column(table =" equipment")
 	private String equipName = this.getHeadname();
@@ -316,6 +317,15 @@ public class Heads {
 	public void setGv(GVs gv) {
 		this.gv = gv;
 	}
+	
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	@Override
 	public String toString() {
@@ -328,23 +338,11 @@ public class Heads {
 				+ ", dutchgearbox=" + dutchgearbox + ", tiltgearbox=" + tiltgearbox + ", controlboardversion="
 				+ controlboardversion + ", inputvoltage=" + inputvoltage + ", pancounter=" + pancounter
 				+ ", pancountertype=" + pancountertype + ", panencoder=" + panencoder + ", tiltencoder=" + tiltencoder
-				+ ", dimensions=" + dimensions + ", joystick=" + joystick + ", gv=" + gv + ", getId()=" + getId()
-				+ ", getEquipType()=" + getEquipType() + ", getStatus()=" + getStatus() + ", getHeadname()="
-				+ getHeadname() + ", getDriftstopper()=" + getDriftstopper() + ", getHoursworked()=" + getHoursworked()
-				+ ", getJobsuccess()=" + getJobsuccess() + ", getJobincidents()=" + getJobincidents()
-				+ ", getJobfails()=" + getJobfails() + ", getWeightcap()=" + getWeightcap() + ", getVolumecap()="
-				+ getVolumecap() + ", getNumofpanmotors()=" + getNumofpanmotors() + ", getNumofdutchmotors()="
-				+ getNumofdutchmotors() + ", getNumoftiltmotors()=" + getNumoftiltmotors() + ", getNumofpanamp()="
-				+ getNumofpanamp() + ", getNumofdutchamp()=" + getNumofdutchamp() + ", getNumoftiltamp()="
-				+ getNumoftiltamp() + ", getPangearbox()=" + getPangearbox() + ", getDutchgearbox()="
-				+ getDutchgearbox() + ", getTiltgearbox()=" + getTiltgearbox() + ", getControlboardversion()="
-				+ getControlboardversion() + ", getInputvoltage()=" + getInputvoltage() + ", getPancounter()="
-				+ getPancounter() + ", getPancountertype()=" + getPancountertype() + ", getPanencoder()="
-				+ getPanencoder() + ", getTiltencoder()=" + getTiltencoder() + ", getDimensions()=" + getDimensions()
-				+ ", getJoystick()=" + getJoystick() + ", getGv()=" + getGv() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", dimensions=" + dimensions + ", location=" + location + ", equipName=" + equipName + ", joystick="
+				+ joystick + ", gv=" + gv + "]";
 	}
-	
+
+
 	
 	
 }

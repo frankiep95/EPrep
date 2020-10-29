@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.prep.dao.EquipmentRepository;
 import com.prep.dao.HeadsRepository;
 import com.prep.dao.PhoneBookRepository;
+import com.prep.dao.RepairOrderRepository;
 import com.prep.dao.WorkRepository;
 import com.prep.service.UsersService;
 import com.prep.utils.DataValidation;
@@ -60,12 +61,14 @@ public class UsersController {
 	@Autowired
 	private PhoneBookRepository phoneBookRepository;
 	
+	@Autowired
+	RepairOrderRepository repairOrderRepository;
 	
 	@Autowired
 	EquipmentRepository equipmentRepository;
 
 	@Autowired 
-	HeadsRepository heads;
+	HeadsRepository headsRepository;
 	
 	@PostMapping("register")
 	@Transactional
@@ -112,8 +115,16 @@ public class UsersController {
 				model.addAttribute("list", findAllPagable);
 			Page<Work> findAllWorkPagable = workRepository.findAll(PageRequest.of(page, size));
 				model.addAttribute("works",findAllWorkPagable);
-			Page<Equipment> findAllEquip = equipmentRepository.findAll(PageRequest.of(page, size));
+		
+			Page<RepairOrder> findAllRepairs = repairOrderRepository.findAll(PageRequest.of(page, size));
+				model.addAttribute("repairs",findAllRepairs);
+				
+				Page<Equipment> findAllEquip = equipmentRepository.findAll(PageRequest.of(0, 10));
 				model.addAttribute("equip", findAllEquip);
+				
+				Page<Heads> findAllHeads = headsRepository.findAll(PageRequest.of(page, size));
+				model.addAttribute("heads" , findAllHeads);
+
 			 });
 			 
 			 model.addAttribute("page", "Profile");
@@ -125,6 +136,17 @@ public class UsersController {
 		} 
 	  return "profile";
 	 }
+	
+	@GetMapping("getequipment")
+	public String equipment(Model model, RedirectAttributes redirect) {
+		try {
+		
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:profile#equipment";
+	}
 	
 	@PostMapping("login")
 	String login(RedirectAttributes redirect, Model model, @RequestParam String email, @RequestParam String password){
@@ -441,6 +463,21 @@ public class UsersController {
 		return new Work();
 	}
 	
+	@PostMapping("addrepairorder")
+	public String addWork(@ModelAttribute RepairOrder repair, Model model, BindingResult result) {
+		
+		try{
+			
+			repairOrderRepository.save(repair);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "redirect:profile#dashboard";
+		}
+		
+		return "redirect:profile#dashboard";
+	}
+	
 	@PostMapping("addhead")
 	public String addhead(@ModelAttribute Heads head, Model model, BindingResult result) {
 		dataValidation.headValidate(head, result);
@@ -448,7 +485,7 @@ public class UsersController {
 		model.addAttribute("statusmsg", "Head Already Exists!");
 		return "redirect:profile#equipment";
 		}
-		heads.save(head);
+		headsRepository.save(head);
 		model.addAttribute("statusmsg", "Head Added Successfully!");		
 		return "redirect:profile#equipment";
 	}
@@ -508,5 +545,8 @@ public class UsersController {
 		
 	}
 	
-
+	@ModelAttribute("repairs")
+	RepairOrder repairs() {
+		return new RepairOrder();
+	}
 }
